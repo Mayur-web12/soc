@@ -1,0 +1,73 @@
+# Practical No. 3
+
+## Aim
+To generate a SHA-256 hash of a text file using OpenSSL and verify its integrity by comparing hash values.
+
+## Software Requirements
+1. Kali Linux
+2. OpenSSL
+3. Terminal
+
+## Theory
+Hashing is a process of converting data into a fixed-length hash value using a cryptographic hash function.
+
+SHA-256 is a cryptographic hash algorithm that generates a 256-bit hash value.
+
+Hashing is used to verify file integrity and detect unauthorized modifications. If the contents of a file change, its hash value will normally change.
+
+## Procedure
+
+### Step 1: Create a text file
+
+```bash
+echo "This is a sample file for hash verification." > data.txt
+```
+
+### Step 2: Display the file
+
+```bash
+cat data.txt
+```
+
+### Step 3: Generate the SHA-256 checksum
+
+```bash
+openssl dgst -sha256 data.txt
+```
+
+### Step 4: Save the checksum in a file
+
+```bash
+openssl dgst -sha256 -out data.sha256 data.txt
+```
+
+### Step 5: Display the saved checksum
+
+```bash
+cat data.sha256
+```
+
+### Step 6: Generate the hash again
+
+```bash
+openssl dgst -sha256 data.txt
+```
+
+Compare the newly generated hash with the saved checksum.
+
+### Step 7: Modify the original file
+
+```bash
+echo "Modified content." >> data.txt
+```
+
+### Step 8: Verify the modified file
+
+```bash
+openssl dgst -sha256 data.txt
+```
+
+**Observation:** The newly generated hash differs from the original hash because the file contents have changed.
+
+## Result
+Successfully generated a SHA-256 hash using OpenSSL and verified file integrity by comparing hash values before and after modification.
