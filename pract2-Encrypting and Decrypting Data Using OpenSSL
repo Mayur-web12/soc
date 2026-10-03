@@ -1,0 +1,84 @@
+# Practical No. 2
+
+## Aim
+To encrypt and decrypt a text file using OpenSSL with AES-256 encryption in Kali Linux.
+
+## Software Requirements
+1. Kali Linux Virtual Machine
+2. OpenSSL
+3. Terminal
+
+## Theory
+OpenSSL is an open-source toolkit used for cryptographic operations and TLS/SSL protocols.
+
+In this practical, OpenSSL is used to encrypt and decrypt text 
+messages using the AES-256 encryption algorithm.
+
+## Procedure
+
+### Step 1: Create a text file
+
+```bash
+>> echo "This is a sample message for OpenSSL encryption." > Original.txt
+```
+
+### Step 2: Display the original file
+
+```bash
+>> cat Original.txt
+```
+
+### Step 3: Encrypt the text file
+
+```bash
+>> openssl enc -aes-256-cbc -in Original.txt -out BinaryEnc.enc
+```
+
+Enter a password and confirm it when prompted.
+
+### Step 4: Display the encrypted file
+
+```bash
+>> cat BinaryEnc.enc
+```
+
+**Observation:** The output appears as unreadable symbols because the encrypted file contains binary data.
+
+### Step 5: Decrypt the encrypted file
+
+```bash
+>> openssl enc -d -aes-256-cbc -in BinaryEnc.enc -out Binary2org.txt
+```
+
+Enter the same password used during encryption.
+
+### Step 6: Display the decrypted file
+
+```bash
+>> cat Binary2org.txt
+```
+
+**Observation:** The original message is displayed correctly after decryption.
+
+### Step 7: Encrypt using Base64 encoding
+
+```bash
+>> openssl enc -aes-256-cbc -a -in Original.txt -out BinaryEncBase64.enc
+```
+
+The `-a` option represents Base64 encoding.
+
+### Step 8: Decrypt the Base64-encoded encrypted file
+
+```bash
+>> openssl enc -d -aes-256-cbc -a -in BinaryEncBase64.enc -out Binary2orgBase64.txt
+```
+
+Display the decrypted content:
+
+```bash
+>> cat Binary2orgBase64.txt
+```
+
+## Result
+Successfully encrypted and decrypted a text file using OpenSSL with AES-256 encryption. The original message was recovered correctly.
