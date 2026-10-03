@@ -1,0 +1,132 @@
+# Practical No. 4
+
+## Title
+Examining Telnet and SSH in Wireshark
+
+## Aim
+To capture and examine Telnet and SSH sessions 
+using Wireshark and compare their data transmission.
+
+## Software Requirements
+1. CyberOps Workstation Virtual Machine
+2. Wireshark
+3. Terminal
+4. Telnet and SSH services
+
+## Theory
+Wireshark is a network protocol analyzer used to capture and examine network packets.
+
+**Telnet** is a remote login protocol that transmits data in plaintext.
+Therefore, usernames, passwords, and session information may be visible during packet analysis.
+
+**SSH (Secure Shell)** is a secure remote login protocol that encrypts 
+transmitted data and protects it from unauthorized viewing.
+
+## Part 1: Capture and Examine a Telnet Session
+
+### Step 1: Start the Virtual Machine
+Start the CyberOps Workstation VM and open the terminal.
+
+### Step 2: Start Wireshark
+
+```bash
+wireshark &
+```
+
+### Step 3: Start Packet Capture
+Open Wireshark and select the Loopback (lo) interface. Start capturing packets.
+
+### Step 4: Establish a Telnet Connection
+
+Open another terminal and execute:
+
+```bash
+telnet localhost
+```
+
+Enter the lab credentials when prompted:
+
+Username: analyst
+
+Password: cyberops
+
+### Step 5: Stop Capture
+After entering the credentials, stop the Wireshark capture.
+
+### Step 6: Apply the Telnet Filter
+
+```text
+telnet
+```
+
+Click Apply.
+
+### Step 7: Follow TCP Stream
+Right-click a Telnet packet and select:
+
+Follow → TCP Stream
+
+### Observation
+The Telnet session is displayed in plaintext, including the login information. 
+Duplicate username characters may appear because of Telnet echo behavior.
+
+### Step 8: Exit Telnet
+
+```bash
+exit
+```
+
+## Part 2: Capture and Examine an SSH Session
+
+### Step 1: Start a New Capture
+Start another Wireshark capture using the Loopback (lo) interface.
+
+### Step 2: Establish an SSH Connection
+
+```bash
+ssh localhost
+```
+
+If prompted, type:
+
+```text
+yes
+```
+
+Enter the lab password when requested.
+
+### Step 3: Stop Capture
+Stop the Wireshark capture after completing the SSH login.
+
+### Step 4: Apply the SSH Filter
+
+```text
+ssh
+```
+
+Click Apply.
+
+### Step 5: Follow TCP Stream
+Right-click an SSHv2 packet and select:
+
+Follow → TCP Stream
+
+### Observation
+The SSH session data is encrypted and cannot be read as plaintext in the captured stream.
+
+### Step 6: Close Wireshark
+Close the Follow TCP Stream window and exit Wireshark.
+
+## Comparison Between Telnet and SSH
+
+| Telnet | SSH |
+|---|---|
+| Data is transmitted in plaintext. | Data is encrypted. |
+| Credentials may be visible. | Credentials are protected by encryption. |
+| Less secure for remote login. | Provides secure remote login. |
+| Uses Telnet protocol. | Uses Secure Shell protocol. |
+
+## Result
+Successfully captured and examined Telnet and SSH sessions using Wireshark.
+Telnet data was visible in plaintext, whereas SSH data was encrypted and
+unreadable in the captured stream.
